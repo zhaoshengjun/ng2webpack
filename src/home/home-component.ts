@@ -3,8 +3,7 @@ import {Component} from "@angular/core";
     selector:'home',
     template:`
     <div>I am a home component</div>
-    <widget-one></widget-one>
-    <widget-two></widget-two>
+    <widget-one></widget-one>    
 `
 })
 
