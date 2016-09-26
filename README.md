@@ -16,7 +16,7 @@
 
 ## HOW-TO Use treeshaking
 
-> Treeshaking only remove the used code in minification phase
+> Treeshaking only remove the unused code in minification phase
 
 The example shows that I have `WidgetOne` and `WidgetTwo` in `WidgetModule`, but `WidgetTwo` is not used. So if you run `npm run build`, the generated `app.[hash].js` will not include anything related to `WidgetTwo`.
 
