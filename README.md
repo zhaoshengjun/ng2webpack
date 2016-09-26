@@ -7,7 +7,7 @@
 - [ ]  Anything else?
 
 
-## Upgrade to webpack 2
+## HOW-TO Upgrade to webpack 2
 
 1. Use webpack `v2.1.0-beta.25`
 2. `resolve` now cannot accept `''` as an valid value => update resovle
