@@ -16,6 +16,10 @@
 
 ## HOW-TO Use treeshaking
 
+> Treeshaking only remove the used code in minification phase
+
 The example shows that I have `WidgetOne` and `WidgetTwo` in `WidgetModule`, but `WidgetTwo` is not used. So if you run `npm run build`, the generated `app.[hash].js` will not include anything related to `WidgetTwo`.
 
 However the `vendor.js` is still very large due to the reason I've include everything from the libs. I will figure out how to reduce this in a later time
+
+ -  Cannot make it work with `DedupePlugin`. So remove it.
