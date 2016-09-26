@@ -13,16 +13,19 @@ module.exports = webpackMerge(commonConfig, {
     path: helpers.root('dist'),
     publicPath: '/',
     filename: '[name].[hash].js',
-    chunkFilename: '[id].[hash].chunk.js'
-  },
-
-  htmlLoader: {
-    minimize: false // workaround for ng2
+     chunkFilename: '[id].[hash].chunk.js'
   },
 
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options:{
+         htmlLoader: {
+          minimize: false // workaround for ng2
+        }
+      }
+    }),
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.DedupePlugin(),
+    // new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
       mangle: {
         keep_fnames: true
