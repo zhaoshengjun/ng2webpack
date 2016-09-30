@@ -1,19 +1,22 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var helpers = require('./helpers');
+const webpack           = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
 
-module.exports = {
+const PATHS = {
+  dist: path.join(__dirname, '../dist'),
+  src:  path.join(__dirname, '../src')
+}
+
+const commonConfig = {
   entry: {
-    'polyfills': './src/pollyfill.ts',
-    'vendor': './src/vendor.ts',
-    'app': './src/main.ts'
+    'polyfills': path.join(PATHS.src,'/pollyfill'),
+    'vendor':    path.join(PATHS.src,'vendor'),
+    'app':       path.join(PATHS.src,'main.ts')
   },
-
   resolve: {
     extensions: ['.js', '.ts']
   },
-
   module: {
     loaders: [
       {
@@ -30,14 +33,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: helpers.root('src', 'app'),
+        exclude:path.join(__dirname,'../src/app'),        
         loader: ExtractTextPlugin.extract({
           fallbackLoader:'style-loader', 
           loader:'css?sourceMap'})
       },
       {
         test: /\.css$/,
-        include: helpers.root('src', 'app'),
+        include: path.join(__dirname,'../src/app'),
         loader: 'raw'
       }
     ]
@@ -45,11 +48,16 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['app', 'vendor', 'polyfills']
+      names: ['vendor', 'polyfills','manifest']  //manifest is important to keep the hash accurate
     }),
 
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     })
   ]
-};
+}
+
+module.exports = {
+  PATHS,
+  commonConfig
+}
